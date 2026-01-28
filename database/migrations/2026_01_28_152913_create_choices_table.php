@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('text', 127)->nullable(false);
         });
     }
 
