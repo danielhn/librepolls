@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title', 255)->nullable(false);
+            $table->boolean('multiple_choices')->default(false)->nullable(false);
         });
     }
 
