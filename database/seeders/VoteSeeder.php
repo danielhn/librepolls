@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Choice;
+use App\Models\Poll;
+use App\Models\Vote;
 use Illuminate\Database\Seeder;
 
 class VoteSeeder extends Seeder
@@ -12,6 +14,10 @@ class VoteSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $poll = Poll::factory()->create();
+
+        Vote::factory(2)->has(
+            Choice::factory()->for($poll)->count(5)
+        )->create();
     }
 }
