@@ -17,7 +17,8 @@ class PollFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->text(50),
+            'multiple_choices' => fake()->boolean()
         ];
     }
 }

@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Choice;
+use App\Models\Poll;
 use Illuminate\Database\Seeder;
 
 class PollSeeder extends Seeder
@@ -12,6 +13,6 @@ class PollSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Poll::factory(5)->has(Choice::factory()->count(rand(2,8)))->create();
     }
 }
