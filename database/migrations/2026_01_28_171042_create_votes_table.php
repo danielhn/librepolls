@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Poll;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,6 +15,7 @@ return new class extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignIdFor(Poll::class);
             $table->ipAddress('voter_ip')->nullable();
             $table->string('voter_token')->nullable();
         });

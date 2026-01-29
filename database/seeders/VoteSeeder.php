@@ -18,6 +18,6 @@ class VoteSeeder extends Seeder
 
         Vote::factory(2)->has(
             Choice::factory()->for($poll)->count(5)
-        )->create();
+        )->state(['poll_id' => $poll])->create();
     }
 }
