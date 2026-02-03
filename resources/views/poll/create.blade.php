@@ -1,12 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('master')
+
+@section('content')
     <h1>Create a new poll</h1>
     @session('status')
     <p> {{ $value }} </p>
@@ -37,5 +31,4 @@
         </div>
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+@endsection
