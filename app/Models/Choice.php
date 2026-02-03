@@ -11,6 +11,7 @@ class Choice extends Model
 {
     /** @use HasFactory<\Database\Factories\ChoiceFactory> */
     use HasFactory;
+    protected $fillable = ['text'];
 
     public function poll(): BelongsTo
     {

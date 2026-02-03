@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poll;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
@@ -19,7 +20,7 @@ class PollController extends Controller
      */
     public function create()
     {
-        //
+        return view('poll.create');
     }
 
     /**
@@ -27,7 +28,25 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $title = $request->string('title');
+        $allowMultipleChoices = $request->boolean('multiple-choices');
+        $choices = $request->array('choices');
+
+        $poll = new Poll();
+        $poll->title = $title;
+        $poll->multiple_choices = $allowMultipleChoices;
+        $poll->save();
+
+        $filledChoices = [];
+        foreach ($choices as $choice) {
+            if ($choice) {
+                $filledChoices[] = ["text" => $choice];
+            }
+        }
+
+        $poll->choices()->createMany($filledChoices);
+
+        return redirect()->route('home')->with('status', 'Poll created successfully');
     }
 
     /**
