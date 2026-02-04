@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Poll;
 use Illuminate\Http\Request;
+use Validator;
 
 class PollController extends Controller
 {
@@ -32,17 +33,27 @@ class PollController extends Controller
         $allowMultipleChoices = $request->boolean('multiple-choices');
         $choices = $request->array('choices');
 
+        // Remove unfilled fields, and any other unwanted key
+        $filledChoices = [];
+        foreach ($choices as $choice) {
+            if ($choice['text']) {
+                $filledChoices[] = ['text' => $choice['text']];
+            }
+        }
+
+        $request->validate([
+            'title' => ['string', 'max:255', 'required'],
+            'multiple-choices' => ['accepted', 'sometimes'],
+            'choices' => ['array','required'],
+            'choices.1.text' => ['required'],
+            'choices.2.text' => ['required'],
+            'choices.*.text' => ['nullable', 'max:127', 'string']
+        ]);
+
         $poll = new Poll();
         $poll->title = $title;
         $poll->multiple_choices = $allowMultipleChoices;
         $poll->save();
-
-        $filledChoices = [];
-        foreach ($choices as $choice) {
-            if ($choice) {
-                $filledChoices[] = ["text" => $choice];
-            }
-        }
 
         $poll->choices()->createMany($filledChoices);
 
