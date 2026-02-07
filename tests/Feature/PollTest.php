@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Choice;
+use App\Models\Poll;
+use Database\Factories\PollFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -56,5 +59,18 @@ class PollTest extends TestCase
 
         $this->assertDatabaseCount('polls', 0);
         $this->assertDatabaseCount('choices', 0);
+    }
+
+    public function test_poll_can_be_seen_for_casting_votes_if_exists()
+    {
+        $poll = Poll::factory()->has(
+            Choice::factory()->count(rand(2,8))
+        )->create();
+
+        $response = $this->get('/polls/' . $poll->id);
+
+        $response->assertStatus(200);
+        $response->assertSee($poll->title);
+        $response->assertSee($poll->choices->first()->text);
     }
 }
