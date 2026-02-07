@@ -36,6 +36,6 @@
             <label for="multiple-choices">Allow selection of multiple choices?</label>
             <input type="checkbox" @if(old('multiple-choices') == 'on') checked="checked" @endif name="multiple-choices" id="multiple-choices">
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Create poll</button>
     </form>
 @endsection

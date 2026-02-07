@@ -63,9 +63,13 @@ class PollController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Poll $poll)
     {
-        //
+        $pollChoices = $poll->choices()->get();
+
+        return view('poll.show', [
+            'poll' => $poll, 'choices' => $pollChoices,
+        ]);
     }
 
     /**
