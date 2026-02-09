@@ -14,8 +14,17 @@ return new class extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title', 255)->nullable(false);
-            $table->boolean('multiple_choices')->default(false)->nullable(false);
+
+            $table->string('slug', 8)->unique();
+            $table->string('title', 255);
+            $table->string('description', 1023)->nullable();
+            $table->string('password', 63)->nullable();
+
+            $table->boolean('multiple_choices')->default(false);
+            $table->boolean('locked')->default(false);
+
+            $table->dateTime('locks_on')->nullable();
+            $table->enum('voter_identifier', ['ip', 'token', 'none']);
         });
     }
 
