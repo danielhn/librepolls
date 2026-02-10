@@ -73,7 +73,7 @@ class PollTest extends TestCase
             Choice::factory()->count(rand(2,8))
         )->create();
 
-        $response = $this->get('/polls/' . $poll->id);
+        $response = $this->get('/' . $poll->slug);
 
         $response->assertStatus(200);
         $response->assertSee($poll->title);

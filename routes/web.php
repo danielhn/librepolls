@@ -5,4 +5,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PollController::class, 'create'])->name('home');
 Route::post('/polls', [PollController::class, 'store'])->name('storePoll');
-Route::get('/polls/{poll}', [PollController::class, 'show'])->name('showPoll');
+Route::get('/{poll:slug}', [PollController::class, 'show'])->name('showPoll');
