@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -21,10 +22,9 @@ class PollFactory extends Factory
             'slug' => Str::random(8),
             'title' => fake()->realText(rand(10,50)),
             'description' => fake()->realText(rand(30,240)),
-            'password' => fake()->optional()->password(16,32),
+            'password' => Hash::make(fake()->optional()->password(16,32)),
             'locked' => fake()->boolean(),
             'multiple_choices' => fake()->boolean(),
-            'locks_on' => fake()->optional()->dateTimeBetween('now', '1 week'),
             'voter_identifier' => fake()->randomElement(['ip', 'token', 'none'])
         ];
     }
