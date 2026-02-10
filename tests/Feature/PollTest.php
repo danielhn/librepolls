@@ -7,6 +7,8 @@ use App\Models\Poll;
 use Database\Factories\PollFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class PollTest extends TestCase
@@ -16,7 +18,10 @@ class PollTest extends TestCase
     {
         $poll = [
             'title' => fake()->realText(60),
-            'multiple-choices' => fake()->boolean()
+            'description' => fake()->realText(rand(30,250)),
+            'password' => Hash::make(fake()->optional()->password(16,32)),
+            'multiple-choices' => fake()->boolean(),
+            'voter-identifier' => fake()->randomElement(['ip', 'token', 'none']),
         ];
 
         $choices = ['choices' => [
@@ -40,12 +45,13 @@ class PollTest extends TestCase
     {
         $poll = [
             'title' => '',
+            'voter-identifier' => 'other',
             'multiple-choices' => 'test'
         ];
 
         $choices = ['choices' => []];
 
-        // Exceed the maximum choices allowed
+        // Exceed the maximum choices allowed on purpose
         for ($i = 0; $i < 12; $i++) {
             $choices['choices'][] = ['text' => fake()->realText(rand(10, 50))];
         }
@@ -55,7 +61,7 @@ class PollTest extends TestCase
         $response = $this->post('/polls', $data);
 
         $response->assertStatus(302);
-        $response->assertSessionHasErrors(['title', 'choices', 'multiple-choices']);
+        $response->assertSessionHasErrors(['title', 'choices', 'multiple-choices', 'voter-identifier']);
 
         $this->assertDatabaseCount('polls', 0);
         $this->assertDatabaseCount('choices', 0);
