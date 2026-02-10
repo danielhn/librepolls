@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Poll;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Validator;
 
 class PollController extends Controller
@@ -30,7 +32,12 @@ class PollController extends Controller
     public function store(Request $request)
     {
         $title = $request->string('title');
+        $description = $request->string('description');
+        $password = $request->string('password');
+
         $allowMultipleChoices = $request->boolean('multiple-choices');
+
+        $voterIdentifier = $request->string('voter-identifier');
         $choices = $request->array('choices');
 
         // Remove unfilled fields, and any other unwanted key
@@ -43,7 +50,10 @@ class PollController extends Controller
 
         $request->validate([
             'title' => ['string', 'max:255', 'required'],
-            'multiple-choices' => ['sometimes', 'boolean'],
+            'description' => ['string', 'max:1023', 'nullable'],
+            'password' => ['string', 'min:4', 'max:63', 'nullable'],
+            'multiple-choices' => ['boolean'],
+            'voter-identifier' => ['in:ip,token,none', 'required'],
             'choices' => ['array','required', 'max:10'],
             'choices.1.text' => ['required'],
             'choices.2.text' => ['required'],
@@ -53,6 +63,10 @@ class PollController extends Controller
         $poll = new Poll();
         $poll->title = $title;
         $poll->multiple_choices = $allowMultipleChoices;
+        $poll->slug = Str::random(8);
+        $poll->description = $description;
+        $poll->password = Hash::make($password);
+        $poll->voter_identifier = $voterIdentifier;
         $poll->save();
 
         $poll->choices()->createMany($filledChoices);

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->boolean('multiple_choices')->default(false);
             $table->boolean('locked')->default(false);
 
-            $table->dateTime('locks_on')->nullable();
             $table->enum('voter_identifier', ['ip', 'token', 'none']);
         });
     }
