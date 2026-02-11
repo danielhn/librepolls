@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('slug', 8)->unique();
             $table->string('title', 255);
             $table->string('description', 1023)->nullable();
-            $table->string('password', 63)->nullable();
 
             $table->boolean('multiple_choices')->default(false);
             $table->boolean('locked')->default(false);

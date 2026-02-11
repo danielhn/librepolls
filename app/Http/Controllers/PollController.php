@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Poll;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Validator;
 
 class PollController extends Controller
 {
@@ -33,7 +31,6 @@ class PollController extends Controller
     {
         $title = $request->string('title');
         $description = $request->string('description');
-        $password = $request->string('password');
 
         $allowMultipleChoices = $request->boolean('multiple-choices');
 
@@ -51,7 +48,6 @@ class PollController extends Controller
         $request->validate([
             'title' => ['string', 'max:255', 'required'],
             'description' => ['string', 'max:1023', 'nullable'],
-            'password' => ['string', 'min:4', 'max:63', 'nullable'],
             'multiple-choices' => ['boolean'],
             'voter-identifier' => ['in:ip,token,none', 'required'],
             'choices' => ['array','required', 'max:10'],
@@ -65,7 +61,6 @@ class PollController extends Controller
         $poll->multiple_choices = $allowMultipleChoices;
         $poll->slug = Str::random(8);
         $poll->description = $description;
-        $poll->password = Hash::make($password);
         $poll->voter_identifier = $voterIdentifier;
         $poll->save();
 

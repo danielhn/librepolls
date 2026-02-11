@@ -22,7 +22,6 @@ class PollFactory extends Factory
             'slug' => Str::random(8),
             'title' => fake()->realText(rand(10,50)),
             'description' => fake()->realText(rand(30,240)),
-            'password' => Hash::make(fake()->optional()->password(16,32)),
             'locked' => fake()->boolean(),
             'multiple_choices' => fake()->boolean(),
             'voter_identifier' => fake()->randomElement(['ip', 'token', 'none'])
