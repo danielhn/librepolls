@@ -19,7 +19,6 @@ class PollTest extends TestCase
         $poll = [
             'title' => fake()->realText(60),
             'description' => fake()->realText(rand(30,250)),
-            'multiple-choices' => fake()->boolean(),
             'voter-identifier' => fake()->randomElement(['ip', 'token', 'none']),
         ];
 

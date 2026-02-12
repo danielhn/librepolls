@@ -48,7 +48,7 @@ class PollController extends Controller
         $request->validate([
             'title' => ['string', 'max:255', 'required'],
             'description' => ['string', 'max:1023', 'nullable'],
-            'multiple-choices' => ['boolean'],
+            'multiple-choices' => ['accepted', 'sometimes'],
             'voter-identifier' => ['in:ip,token,none', 'required'],
             'choices' => ['array','required', 'max:10'],
             'choices.1.text' => ['required'],
