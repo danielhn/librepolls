@@ -1,9 +1,11 @@
 @extends('master')
 
 @section('content')
-    <h1>Create a new poll</h1>
     @session('status')
-    <p> {{ $value }} </p>
+        <p>{{ session('status') }}</p>
+    @endsession
+    @session('pollURL')
+        <p>The link for your new poll is <a href="{{ session('pollURL') }}">{{ session('pollURL') }}</a></p>
     @endsession
     @if ($errors->any())
         <ul>
@@ -12,6 +14,7 @@
             @endforeach
         </ul>
     @endif
+    <h1>Create a new poll</h1>
     <form action="{{ route('storePoll') }}" method="post">
         @csrf
         <div>
@@ -22,9 +25,8 @@
         <div>
             <label for="description">Description</label>
             <textarea id="description" name="description"
-                      maxlength="{{config('librepolls.polls.description_max_length')}}" cols="30" rows="10">
-                {{old('description')}}
-            </textarea>
+                      maxlength="{{config('librepolls.polls.description_max_length')}}"
+                      cols="30" rows="10">{{old('description')}}</textarea>
         </div>
         <div>
             <label for="choice-1">Choice 1</label>

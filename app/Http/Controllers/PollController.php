@@ -66,7 +66,9 @@ class PollController extends Controller
 
         $poll->choices()->createMany($filledChoices);
 
-        return redirect()->route('home')->with('status', 'Poll created successfully');
+        return redirect()->route('home')
+            ->with('status', 'Poll created successfully.')
+            ->with('pollURL', route('showPoll', $poll->slug));
     }
 
     /**
