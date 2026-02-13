@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignIdFor(Poll::class);
             $table->ipAddress('voter_ip')->nullable();
-            $table->string('voter_token')->nullable();
+            $table->string('voter_token', config('librepolls.votes.voter_token_length'))->nullable();
         });
     }
 

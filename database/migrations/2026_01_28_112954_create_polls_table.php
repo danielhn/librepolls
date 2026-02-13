@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('slug', 8)->unique();
-            $table->string('title', 255);
-            $table->string('description', 1023)->nullable();
+            $table->string('slug', config('librepolls.polls.slug_length'))->unique();
+            $table->string('title', config('librepolls.polls.title_max_length'));
+            $table->string('description', config('librepolls.polls.description_max_length'))->nullable();
 
             $table->boolean('multiple_choices')->default(false);
             $table->boolean('locked')->default(false);

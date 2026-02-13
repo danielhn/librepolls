@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('text', 127)->nullable(false);
+            $table->string('text', config('librepolls.choices.max_text_length'))->nullable(false);
             $table->foreignIdFor(Poll::class);
         });
     }
