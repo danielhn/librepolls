@@ -46,20 +46,20 @@ class PollController extends Controller
         }
 
         $request->validate([
-            'title' => ['string', 'max:255', 'required'],
-            'description' => ['string', 'max:1023', 'nullable'],
+            'title' => ['string', 'max:' . config('librepolls.polls.title_max_length'), 'required'],
+            'description' => ['string', 'max:' . config('librepolls.polls.description_max_length'), 'nullable'],
             'multiple-choices' => ['accepted', 'sometimes'],
             'voter-identifier' => ['in:ip,token,none', 'required'],
-            'choices' => ['array','required', 'max:10'],
+            'choices' => ['array','required', 'max:' . config('librepolls.choices.max_per_poll')],
             'choices.1.text' => ['required'],
             'choices.2.text' => ['required'],
-            'choices.*.text' => ['nullable', 'max:127', 'string']
+            'choices.*.text' => ['nullable', 'max:' . config('librepolls.choices.max_text_length'), 'string']
         ]);
 
         $poll = new Poll();
         $poll->title = $title;
         $poll->multiple_choices = $allowMultipleChoices;
-        $poll->slug = Str::random(8);
+        $poll->slug = Str::random(config('librepolls.polls.slug_length'));
         $poll->description = $description;
         $poll->voter_identifier = $voterIdentifier;
         $poll->save();
