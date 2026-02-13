@@ -18,7 +18,7 @@ class ChoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'text' => fake()->text(32),
+            'text' => fake()->realText(rand(10, config('librepolls.choices.max_text_length'))),
         ];
     }
 }

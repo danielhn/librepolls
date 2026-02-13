@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -19,9 +18,9 @@ class PollFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug' => Str::random(8),
-            'title' => fake()->realText(rand(10,50)),
-            'description' => fake()->realText(rand(30,240)),
+            'slug' => Str::random(config('librepolls.polls.slug_length')),
+            'title' => fake()->realText(rand(10, config('librepolls.polls.title_max_length'))),
+            'description' => fake()->realText(rand(10, config('librepolls.polls.description_max_length'))),
             'locked' => fake()->boolean(),
             'multiple_choices' => fake()->boolean(),
             'voter_identifier' => fake()->randomElement(['ip', 'token', 'none'])

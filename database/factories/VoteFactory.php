@@ -19,7 +19,7 @@ class VoteFactory extends Factory
     {
         return [
             'voter_ip' => fake()->ipv4(),
-            'voter_token' => Str::random(32)
+            'voter_token' => Str::random(config('librepolls.votes.voter_token_length'))
         ];
     }
 }
