@@ -14,6 +14,6 @@ class ChoiceSeeder extends Seeder
     public function run(): void
     {
         $poll = Poll::factory()->create();
-        Choice::factory()->count(rand(2,8))->for($poll)->create();
+        Choice::factory()->count(rand(2, config('librepolls.choices.max_per_poll')))->for($poll)->create();
     }
 }
