@@ -16,26 +16,31 @@
         @csrf
         <div>
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="{{ old('title') }}" maxlength="255" required>
+            <input type="text" id="title" name="title" value="{{ old('title') }}"
+                   maxlength="{{ config('librepolls.polls.title_max_length') }}" required>
         </div>
         <div>
             <label for="description">Description</label>
-            <textarea id="description" name="description" maxlength="1023" cols="30" rows="10">
+            <textarea id="description" name="description"
+                      maxlength="{{config('librepolls.polls.description_max_length')}}" cols="30" rows="10">
                 {{old('description')}}
             </textarea>
         </div>
         <div>
             <label for="choice-1">Choice 1</label>
-            <input type="text" id="choice-1" name="choices[1][text]" value="{{ old('choices.1.text')}}" maxlength="127" required>
+            <input type="text" id="choice-1" name="choices[1][text]" value="{{ old('choices.1.text')}}"
+                   maxlength="{{config('librepolls.choices.max_text_length')}}" required>
         </div>
         <div>
             <label for="choice-2">Choice 2</label>
-            <input type="text" id="choice-2" name="choices[2][text]" value="{{ old('choices.2.text') }}" maxlength="127" required>
+            <input type="text" id="choice-2" name="choices[2][text]" value="{{ old('choices.2.text') }}"
+                   maxlength="{{config('librepolls.choices.max_text_length')}}" required>
         </div>
-        @for ($i = 3; $i <= 10; $i++)
+        @for ($i = 3; $i <= config('librepolls.choices.max_per_poll'); $i++)
             <div>
                 <label for="choice-{{$i}}">Choice {{$i}}</label>
-                <input type="text" id="choice-{{$i}}" name="choices[{{$i}}][text]" value="{{ old('choices.' . $i . '.text') }}" maxlength="127">
+                <input type="text" id="choice-{{$i}}" name="choices[{{$i}}][text]" value="{{ old('choices.' . $i . '.text') }}"
+                       maxlength="{{config('librepolls.choices.max_text_length')}}">
             </div>
         @endfor
         <div>
