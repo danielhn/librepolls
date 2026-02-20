@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('choice_vote', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignIdFor(Choice::class);
             $table->foreignIdFor(Vote::class);
         });
