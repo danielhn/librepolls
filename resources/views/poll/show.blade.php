@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>{{ $poll->title }}</h1>
-    <form action="" method="post">
+    @session('status')
+    <p>{{ session('status') }}</p>
+    @endsession
+    <form action="{{ route('storeVote', $poll->slug) }}" method="post">
         @csrf
         @foreach($choices as $choice)
             <div>
