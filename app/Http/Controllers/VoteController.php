@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Choice;
+use App\Http\Requests\StoreVoteRequest;
 use App\Models\Poll;
 use App\Models\Vote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class VoteController extends Controller
@@ -30,9 +29,9 @@ class VoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Poll $poll)
+    public function store(StoreVoteRequest $request, Poll $poll)
     {
-        $choices = $request->array('choices');
+        $choices = $request->validated('choices');
 
         $vote = new Vote();
 
