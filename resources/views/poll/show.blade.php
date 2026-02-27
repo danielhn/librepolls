@@ -10,9 +10,9 @@
         @foreach($choices as $choice)
             <div>
                 @if($poll->multiple_choices)
-                    <input id="{{$choice->id}}" type="checkbox" name="choices" value="{{$choice->id}}">
+                    <input id="{{$choice->id}}" type="checkbox" name="choices[]" value="{{$choice->id}}">
                 @else
-                    <input id="{{$choice->id}}" type="radio" name="choices" value="{{$choice->id}}">
+                    <input id="{{$choice->id}}" type="radio" name="choices[]" value="{{$choice->id}}">
                 @endif
                 <label for="{{$choice->id}}">{{$choice->text}}</label>
             </div>
