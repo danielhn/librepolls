@@ -40,8 +40,8 @@ class StorePollRequest extends FormRequest
             'multiple-choices' => ['accepted', 'sometimes'],
             'voter-identifier' => ['in:ip,token,none', 'required'],
             'choices' => ['array', 'required', 'max:' . config('librepolls.choices.max_per_poll')],
+            'choices.0.text' => ['required'],
             'choices.1.text' => ['required'],
-            'choices.2.text' => ['required'],
             'choices.*.text' => ['nullable', 'max:' . config('librepolls.choices.max_text_length'), 'string']
         ];
     }
