@@ -46,11 +46,11 @@ class VoteController extends Controller
         $vote->choices()->attach($choices);
 
         if ($poll->voter_identifier === 'token') {
-            return redirect()->route('showPoll', $poll->slug)
+            return redirect()->route('resultsPoll', $poll->slug)
                 ->with('status', 'Vote added successfully')
                 ->cookie(cookie()->forever($poll->slug, $vote->voter_token));
         } else {
-            return redirect()->route('showPoll', $poll->slug)
+            return redirect()->route('resultsPoll', $poll->slug)
                 ->with('status', 'Vote added successfully');
         }
     }

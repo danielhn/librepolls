@@ -65,6 +65,25 @@ class PollController extends Controller
         ]);
     }
 
+    public function results(Poll $poll)
+    {
+        $totalVotes = $poll->votes()->get()->count();
+        $choices = $poll->choices()->get();
+        $votes = [];
+
+        foreach ($choices as $choice) {
+            $votes[$choice->text] = $choice->votes()->count();
+        }
+
+        // Sort results by highest voted option, descending
+        arsort($votes);
+
+        return view('poll.results', [
+            'results' => $votes, 'totalVotes' => $totalVotes,
+            'title' => $poll->title, 'description' => $poll->description
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -17,17 +17,15 @@ class CheckIfUserCanVote
     public function handle(Request $request, Closure $next): Response
     {
         $poll = $request->route('poll');
-        $slug = $poll->slug;
 
         if ($poll->voter_identifier === 'token') {
-            $voterToken = $request->cookie($slug);
+            $voterToken = $request->cookie($poll->slug);
 
             $vote = Vote::where('voter_token', $voterToken)
                 ->where('poll_id', $poll->id)->first();
 
             if ($vote) {
-                return redirect()->route('home')
-                    ->with('status', 'You have already voted');
+                return redirect()->route('resultsPoll', $poll->slug);
             }
         } elseif ($poll->voter_identifier === 'ip') {
             $ip = $request->ip();
@@ -36,8 +34,7 @@ class CheckIfUserCanVote
                 ->where('poll_id', $poll->id)->first();
 
             if ($vote) {
-                return redirect()->route('home')
-                    ->with('status', 'You have already voted');
+                return redirect()->route('resultsPoll', $poll->slug);
             }
         }
 

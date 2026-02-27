@@ -13,3 +13,4 @@ Route::get('/{poll:slug}', [PollController::class, 'show'])
 Route::post('/votes/{poll:slug}', [VoteController::class, 'store'])
     ->name('storeVote')
     ->middleware(CheckIfUserCanVote::class);
+Route::get('{poll:slug}/results', [PollController::class, 'results'])->name('resultsPoll');
