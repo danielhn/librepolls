@@ -14,6 +14,7 @@ use Tests\TestCase;
 class PollTest extends TestCase
 {
     use RefreshDatabase;
+
     public function test_poll_can_be_created_if_valid(): void
     {
         $poll = [
@@ -69,7 +70,7 @@ class PollTest extends TestCase
         $this->assertDatabaseCount('choices', 0);
     }
 
-    public function test_poll_can_be_seen_for_casting_votes_if_exists()
+    public function test_poll_can_be_seen_for_creating_votes_if_exists()
     {
         $poll = Poll::factory()->has(
             Choice::factory()->count(rand(2, config('librepolls.choices.max_per_poll')))
@@ -80,5 +81,17 @@ class PollTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($poll->title);
         $response->assertSee($poll->choices->first()->text);
+    }
+
+    public function test_poll_results_can_be_seen()
+    {
+        $poll = Poll::factory()->has(
+            Choice::factory()->count(rand(2, config('librepolls.choices.max_per_poll')))
+        )->create();
+
+        $response = $this->get(route('resultsPoll', $poll->slug));
+
+        $response->assertStatus(200);
+        $response->assertSee('Results for ' . $poll->title);
     }
 }
