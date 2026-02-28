@@ -70,7 +70,7 @@ class VoteTest extends TestCase
             ['choices' => [$firstChoice]]
         );
 
-        $response->assertSessionHas('status', 'You have already voted');
+        $response->assertRedirectToRoute('resultsPoll', $poll->slug);
     }
 
     public function test_vote_cannot_be_created_twice_if_poll_has_ip_duplication_check(): void
@@ -89,6 +89,6 @@ class VoteTest extends TestCase
                 ['choices' => [$firstChoice]]
         );
 
-        $response->assertSessionHas('status', 'You have already voted');
+        $response->assertRedirectToRoute('resultsPoll', $poll->slug);
     }
 }
