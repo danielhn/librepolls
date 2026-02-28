@@ -19,5 +19,6 @@
         @endforeach
         <button type="submit">Vote</button>
     </form>
+    <p><a href="{{route('resultsPoll', $poll->slug)}}">See results</a></p>
     <p><a href="{{route('home')}}">Create a new poll</a></p>
 @endsection
