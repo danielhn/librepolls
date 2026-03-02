@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('description', config('librepolls.polls.description_max_length'))->nullable();
 
             $table->boolean('multiple_choices')->default(false);
-            $table->boolean('locked')->default(false);
 
             $table->enum('voter_identifier', ['ip', 'token', 'none']);
         });
