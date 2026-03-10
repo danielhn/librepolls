@@ -1,10 +1,13 @@
 @extends('master')
 
 @section('content')
-    <h1>{{ $poll->title }}</h1>
     @session('status')
     <p class="status-container">{{ session('status') }}</p>
     @endsession
+    <h1>{{ $poll->title }}</h1>
+    @if($poll->description)
+        <p>{{ $poll->description }}</p>
+    @endif
     <form action="{{ route('storeVote', $poll->slug) }}" method="post">
         @csrf
         @foreach($choices as $choice)
