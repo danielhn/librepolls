@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePollRequest;
 use App\Models\Poll;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -65,7 +66,7 @@ class PollController extends Controller
         ]);
     }
 
-    public function results(Poll $poll)
+    public function results(Request $request, Poll $poll)
     {
         $totalVotes = $poll->votes()->get()->count();
         $choices = $poll->choices()->get();
@@ -78,9 +79,29 @@ class PollController extends Controller
         // Sort results by highest voted option, descending
         arsort($votes);
 
+        $showVoteLink = true;
+
+        if (session('status') === 'Vote added successfully' and $poll->voter_identifier !== 'none') {
+            $showVoteLink = false;
+        } else {
+            if ($poll->voter_identifier === 'token' and $request->hasCookie($poll->slug)) {
+                $showVoteLink = false;
+            } elseif ($poll->voter_identifier === 'ip') {
+                $ip = $request->ip();
+
+                $vote = Vote::where('voter_ip', $ip)
+                    ->where('poll_id', $poll->id)->first();
+
+                if ($vote) {
+                    $showVoteLink = false;
+                }
+            }
+        }
+
         return view('poll.results', [
             'results' => $votes, 'totalVotes' => $totalVotes,
-            'title' => $poll->title, 'description' => $poll->description
+            'title' => $poll->title, 'description' => $poll->description,
+            'slug' => $poll->slug, 'showVoteLink' => $showVoteLink
         ]);
     }
 

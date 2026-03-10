@@ -12,5 +12,8 @@
         @endforeach
     </ol>
     <p><b>Total votes: {{$totalVotes}}</b></p>
+    @if($showVoteLink)
+        <p><a href="{{route('showPoll', $slug)}}">Vote in this poll</a></p>
+    @endif
     <p><a href="{{route('home')}}">Create a new poll</a></p>
 @endsection
