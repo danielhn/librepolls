@@ -92,6 +92,6 @@ class PollTest extends TestCase
         $response = $this->get(route('resultsPoll', $poll->slug));
 
         $response->assertStatus(200);
-        $response->assertSee('Results for ' . $poll->title);
+        $response->assertSee('Results for: ' . $poll->title);
     }
 }

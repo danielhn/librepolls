@@ -3,12 +3,12 @@
 @section('content')
     <h1>{{ $poll->title }}</h1>
     @session('status')
-    <p>{{ session('status') }}</p>
+    <p class="status-container">{{ session('status') }}</p>
     @endsession
     <form action="{{ route('storeVote', $poll->slug) }}" method="post">
         @csrf
         @foreach($choices as $choice)
-            <div>
+            <div class="radio-checkbox-container">
                 @if($poll->multiple_choices)
                     <input id="{{$choice->id}}" type="checkbox" name="choices[]" value="{{$choice->id}}">
                 @else

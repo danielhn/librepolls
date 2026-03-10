@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+    background-color: #a0a6aa;
+}
+
+
+main {
+    width: 40%;
+    margin: 5rem auto 0 auto;
+    background-color: white;
+    padding: 1rem 3rem 2rem;
+}
+
+h1, p {
+    text-align: center;
+}
+
+form, .display-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+}
+
+input, button, p, select, li, textarea {
+    font-size: 1.2rem;
+    font-family: inherit;
+}
+
+input, button, textarea, select, .status-container {
+    border: 2px solid gray;
+}
+
+.radio-checkbox-container {
+    display: flex;
+    align-content: center;
+    margin: 1rem 0;
+}
+
+.radio-checkbox-container label {
+    margin-bottom: 0;
+}
+
+.radio-checkbox-container input {
+    min-width: 1.2rem;
+    margin-right: 0.3rem;
+}
+
+.status-container {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 1rem;
+    border-width: 0.3rem;
+}
+
+input:is([type=text]), textarea, select {
+    width: 100%;
+    padding: 0.3rem;
+}
+
+select, button {
+    background-color: transparent;
+}
+
+button {
+    margin-top: 1rem;
+    /*background-color: transparent;*/
+    font-weight: bold;
+    padding: 0.5rem;
+    cursor: pointer;
+    min-width: 10rem;
+    align-self: center;
+}
+
+p {
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 1300px) {
+    main {
+        width: 50%;
+    }
+}
+
+@media (max-width: 800px) {
+    main {
+        width: 60%;
+    }
+}
+
+
+@media (max-width: 600px) {
+    main {
+        width: 80%;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    main {
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    main, button, p, a, select {
+        color: white;
+    }
+    button {
+        border-color: white;
+    }
+    body {
+        background-color: #595b60;
+    }
+    main {
+        background-color: #2d2d2d;
+    }
+}
