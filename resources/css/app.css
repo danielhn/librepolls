@@ -1,11 +1,11 @@
 * {
     box-sizing: border-box;
 }
+
 body {
     font-family: sans-serif;
     background-color: #a0a6aa;
 }
-
 
 main {
     width: 40%;
@@ -16,6 +16,10 @@ main {
 
 h1, p {
     text-align: center;
+}
+
+a {
+    color: black;
 }
 
 form, .display-flex {
@@ -71,7 +75,6 @@ select, button {
 
 button {
     margin-top: 1rem;
-    /*background-color: transparent;*/
     font-weight: bold;
     padding: 0.5rem;
     cursor: pointer;
@@ -81,6 +84,20 @@ button {
 
 p {
     overflow-wrap: break-word;
+}
+
+meter {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 1.2rem;
+    background: #adabab;
+}
+meter::-moz-meter-bar {
+    background: black;
+}
+
+meter::-webkit-meter-bar {
+    background: black;
 }
 
 @media (max-width: 1300px) {
