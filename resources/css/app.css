@@ -95,7 +95,16 @@ meter {
     height: 1.2rem;
     background: #adabab;
 }
+
 meter::-moz-meter-bar {
+    background: black;
+}
+
+meter::-webkit-meter-bar {
+    background: #adabab;
+}
+
+meter::-webkit-meter-optimum-value {
     background: black;
 }
 
@@ -106,10 +115,6 @@ summary {
 
 summary::marker {
     content: none;
-}
-
-meter::-webkit-meter-bar {
-    background: black;
 }
 
 @media (max-width: 1300px) {
