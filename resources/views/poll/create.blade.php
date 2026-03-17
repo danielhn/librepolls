@@ -39,13 +39,16 @@
             <input type="text" id="choice-2" name="choices[2][text]" value="{{ old('choices.2.text') }}"
                    maxlength="{{config('librepolls.choices.max_text_length')}}" required>
         </div>
-        @for ($i = 3; $i <= config('librepolls.choices.max_per_poll'); $i++)
-            <div>
-                <label for="choice-{{$i}}">Choice {{$i}}</label>
-                <input type="text" id="choice-{{$i}}" name="choices[{{$i}}][text]" value="{{ old('choices.' . $i . '.text') }}"
-                       maxlength="{{config('librepolls.choices.max_text_length')}}">
-            </div>
-        @endfor
+        <details>
+            <summary>Show / hide extra choices</summary>
+            @for ($i = 3; $i <= config('librepolls.choices.max_per_poll'); $i++)
+                <div>
+                    <label for="choice-{{$i}}">Choice {{$i}}</label>
+                    <input type="text" id="choice-{{$i}}" name="choices[{{$i}}][text]" value="{{ old('choices.' . $i . '.text') }}"
+                           maxlength="{{config('librepolls.choices.max_text_length')}}">
+                </div>
+            @endfor
+        </details>
         <div class="radio-checkbox-container">
             <input type="checkbox" @if(old('multiple-choices') == 'on') checked="checked" @endif name="multiple-choices" id="multiple-choices">
             <label for="multiple-choices">Allow selection of multiple choices?</label>

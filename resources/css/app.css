@@ -33,12 +33,12 @@ label {
     margin-bottom: 0.4rem;
 }
 
-input, button, p, select, li, textarea {
+input, button, p, select, li, textarea, details {
     font-size: 1.2rem;
     font-family: inherit;
 }
 
-input, button, textarea, select, .status-container {
+input, button, textarea, select, .status-container, summary {
     border: 2px solid gray;
 }
 
@@ -73,11 +73,14 @@ select, button {
     background-color: transparent;
 }
 
-button {
+button, summary {
     margin-top: 1rem;
     font-weight: bold;
     padding: 0.5rem;
     cursor: pointer;
+}
+
+button {
     min-width: 10rem;
     align-self: center;
 }
@@ -96,6 +99,15 @@ meter::-moz-meter-bar {
     background: black;
 }
 
+summary {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+summary::marker {
+    content: none;
+}
+
 meter::-webkit-meter-bar {
     background: black;
 }
@@ -111,7 +123,6 @@ meter::-webkit-meter-bar {
         width: 60%;
     }
 }
-
 
 @media (max-width: 600px) {
     main {
@@ -131,7 +142,7 @@ meter::-webkit-meter-bar {
     main, button, p, a, select {
         color: white;
     }
-    button {
+    button, summary, select {
         border-color: white;
     }
     body {
