@@ -39,7 +39,7 @@
             <input type="text" id="choice-2" name="choices[2][text]" value="{{ old('choices.2.text') }}"
                    maxlength="{{config('librepolls.choices.max_text_length')}}" required>
         </div>
-        <details>
+        <details @if(old('choices.3.text')) open @endif>
             <summary>Show / hide extra choices</summary>
             @for ($i = 3; $i <= config('librepolls.choices.max_per_poll'); $i++)
                 <div>
