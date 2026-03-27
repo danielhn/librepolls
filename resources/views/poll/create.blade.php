@@ -8,11 +8,11 @@
         <p>The link for your new poll is <a href="{{ session('pollURL') }}">{{ session('pollURL') }}</a></p>
     @endsession
     @if ($errors->any())
-        <ul>
+        <div class="status-container">
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <p>{{ $error }}</p>
             @endforeach
-        </ul>
+        </div>
     @endif
     <h1>Create a new poll</h1>
     <form action="{{ route('storePoll') }}" method="post">
