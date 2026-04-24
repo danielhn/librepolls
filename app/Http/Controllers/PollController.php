@@ -31,23 +31,15 @@ class PollController extends Controller
      */
     public function store(StorePollRequest $request)
     {
-        $title = $request->safe()->string('title');
-        $description = $request->safe()->string('description');
+        $poll = Poll::create([
+            'title' =>  $request->safe()->string('title'),
+            'multiple_choices' => $request->safe()->boolean('multiple-choices'),
+            'slug' => Str::random(config('librepolls.polls.slug_length')),
+            'description' => $request->safe()->string('description'),
+            'voter_identifier' => $request->safe()->string('voter-identifier')
+        ]);
 
-        $allowMultipleChoices = $request->safe()->boolean('multiple-choices');
-
-        $voterIdentifier = $request->safe()->string('voter-identifier');
-        $filledChoices = $request->safe()->array('choices');
-
-        $poll = new Poll();
-        $poll->title = $title;
-        $poll->multiple_choices = $allowMultipleChoices;
-        $poll->slug = Str::random(config('librepolls.polls.slug_length'));
-        $poll->description = $description;
-        $poll->voter_identifier = $voterIdentifier;
-        $poll->save();
-
-        $poll->choices()->createMany($filledChoices);
+        $poll->choices()->createMany($request->safe()->array('choices'));
 
         return redirect()->route('home')
             ->with('status', 'Poll created successfully.')
