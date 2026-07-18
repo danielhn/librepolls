@@ -22,6 +22,10 @@ a {
     color: black;
 }
 
+ol {
+    padding-left: 1rem;
+}
+
 form, .display-flex {
     display: flex;
     flex-direction: column;

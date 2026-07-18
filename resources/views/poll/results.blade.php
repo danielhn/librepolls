@@ -8,11 +8,12 @@
     <p>{{$description}}</p>
     <ol>
         @foreach($results as $choice => $votes)
-            <div>
+            <li>
                 <label for="option{{ $loop->iteration }}">{{ $choice }} ({{ $votes }} votes)</label>
                 <meter id="option{{ $loop->iteration }}" max="{{ $totalVotes }}"
-                       value="{{ $votes }}">{{ $votes }} votes</meter>
-            </div>
+                       value="{{ $votes }}">{{ $votes }} votes
+                </meter>
+            </li>
         @endforeach
     </ol>
     <p><b>Total votes: {{$totalVotes}}</b></p>
