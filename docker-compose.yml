@@ -1,0 +1,11 @@
+# For development only!
+services:
+  php:
+    image: serversideup/php:8.4-fpm-nginx
+    restart: unless-stopped
+    ports:
+      - "8130:8080"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      PHP_OPCACHE_ENABLE: "1"
