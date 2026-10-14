@@ -32,6 +32,7 @@ services:
       APP_ENV: production
       APP_URL: https://example.com
       APP_KEY: set-your-key-here
+      DB_HOST: mariadb
       DB_DATABASE: librepolls
       DB_USERNAME: librepolls
       DB_PASSWORD: librepolls
@@ -71,6 +72,7 @@ services:
       APP_ENV: production
       APP_URL: https://example.com
       APP_KEY: set-your-key-here
+      DB_HOST: pgsql
       DB_DATABASE: librepolls
       DB_USERNAME: pgsql
       DB_PASSWORD: librepolls
