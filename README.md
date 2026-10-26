@@ -21,7 +21,7 @@ This example uses MariaDB as the database.
 ```yaml copy
 services:
   php:
-    image: ghcr.io/danielhn/librepolls:1.0.0
+    image: ghcr.io/danielhn/librepolls:1.0.1
     restart: unless-stopped
     container_name: librepolls
     ports:
@@ -61,7 +61,7 @@ This example uses PostgreSQL as the database.
 ```yaml copy
 services:
   php:
-    image: ghcr.io/danielhn/librepolls:1.0.0
+    image: ghcr.io/danielhn/librepolls:1.0.1
     restart: unless-stopped
     container_name: librepolls
     ports:
